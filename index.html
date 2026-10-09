@@ -1,0 +1,85 @@
+---
+layout: default
+nav: home
+masthead: true
+---
+{%- assign strips = site.comics | sort: "date" | reverse -%}
+{%- assign week = strips.first -%}
+{%- assign laatste = site.posts.first -%}
+{%- if laatste -%}
+  {%- assign editie = site.posts | where: "editie", laatste.editie -%}
+  {%- assign hoofd = editie | where: "featured", true | first | default: laatste -%}
+{%- endif -%}
+<main class="wrap page">
+
+  <section class="hero" aria-label="Uitgelicht">
+    {%- if week %}
+    {%- assign wreeks = site.data.series | where: "id", week.series | first -%}
+    <article class="card hero__comic">
+      <div class="row">
+        <span class="tag tag--sun">Strip van de week</span>
+        <span class="meta meta--violet">{{ wreeks.name }} · Aflevering {{ week.episode }}</span>
+      </div>
+      <a class="strip-preview" href="{{ week.url | relative_url }}" aria-label="Lees {{ week.title }}">
+        {%- for p in week.panels limit: 3 %}
+        <img src="{{ p.image | relative_url }}" alt="{{ p.alt | escape }}">
+        {%- endfor %}
+      </a>
+      <h1>{{ week.title }}</h1>
+      {%- if week.teaser %}<p class="lead">{{ week.teaser }}</p>{% endif %}
+      <div class="row row--between">
+        <span class="meta">Tekeningen: {{ week.author | default: wreeks.author }}</span>
+        <a class="btn btn--sun" href="{{ week.url | relative_url }}">Lees de strip<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </article>
+    {%- endif %}
+
+    <div class="hero__side">
+      {%- if hoofd %}
+      <article class="card feature htl">
+        <span class="tag tag--white">Hoofdartikel</span>
+        <h2>{{ hoofd.title }}</h2>
+        {%- if hoofd.intro %}<p>{{ hoofd.intro }}</p>{% endif %}
+        <div class="row row--between feature__foot">
+          <span>{{ hoofd.author }}{% if hoofd.klas %}, {{ hoofd.klas }}{% endif %}</span>
+          <a class="btn btn--white" href="{{ hoofd.url | relative_url }}">Lezen</a>
+        </div>
+      </article>
+      {%- endif %}
+    </div>
+  </section>
+
+  {%- if editie %}
+  <section class="section" aria-labelledby="editie">
+    <div class="section__head">
+      <h2 id="editie">In deze editie</h2>
+      <a href="{{ '/artikelen/' | relative_url }}">Alle edities</a>
+    </div>
+    <div class="grid grid--articles">
+      {%- for p in editie %}{% include artikelkaart.html post=p %}{% endfor %}
+    </div>
+  </section>
+  {%- endif %}
+
+  <section class="section" aria-labelledby="reeksen">
+    <div class="section__head">
+      <h2 id="reeksen">Stripreeksen</h2>
+      <a href="{{ '/strips/' | relative_url }}">Alle strips</a>
+    </div>
+    <div class="grid grid--series">
+      {%- for s in site.data.series %}
+      {%- assign n = site.comics | where: "series", s.id | size -%}
+      <a class="card series-card" href="{{ '/strips/' | relative_url }}#{{ s.id }}">
+        <div class="series-card__cover ht" style="background-color: {{ s.tint | default: '#C4B5FD' }}">
+          {%- if s.cover %}<img src="{{ s.cover | relative_url }}" alt="">{% endif %}
+          <span class="count">{{ n }} {% if n == 1 %}aflevering{% else %}afleveringen{% endif %}</span>
+        </div>
+        <div class="series-card__body">
+          <h3>{{ s.name }}</h3>
+          <span>{{ s.genre }} · {{ s.author }}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </section>
+</main>

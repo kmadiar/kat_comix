@@ -1,0 +1,2 @@
+{%- assign _m = include.date | date: "%-m" | minus: 1 -%}
+{{- include.date | date: "%-d" }} {{ site.data.maanden[_m] }} {{ include.date | date: "%Y" -}}

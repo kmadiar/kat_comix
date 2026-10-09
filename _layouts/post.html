@@ -1,0 +1,55 @@
+---
+layout: default
+nav: artikelen
+---
+{%- assign woorden = content | number_of_words -%}
+{%- assign minuten = woorden | divided_by: 200 | at_least: 1 -%}
+<main class="wrap page">
+  <article class="article">
+    <header class="article__head">
+      <div class="row">
+        {%- if page.rubriek %}<span class="tag tag--sm">{{ page.rubriek }}</span>{% endif %}
+        <span class="meta">Editie nr. {{ page.editie }} · {% include datum.html date=page.date %}</span>
+      </div>
+      <h1>{{ page.title }}</h1>
+      {%- if page.intro %}<p class="article__intro">{{ page.intro }}</p>{% endif %}
+      <div class="author">
+        <span class="author__avatar ht" aria-hidden="true"></span>
+        <span class="author__text"><strong>{{ page.author }}{% if page.klas %}, {{ page.klas }}{% endif %}</strong><span>{{ minuten }} min lezen</span></span>
+      </div>
+    </header>
+
+    {%- if page.image %}
+    <figure class="article__figure">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: '' }}">
+      {%- if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
+    </figure>
+    {%- endif %}
+
+    <div class="article__layout">
+      <div class="prose">
+        {{ content }}
+      </div>
+      {%- if page.strip -%}
+      {%- assign rel = site.comics | where_exp: "c", "c.url contains page.strip" | first -%}
+      {%- if rel %}
+      <aside class="related-comic" aria-label="Strip bij dit onderwerp">
+        <strong>Strip bij dit onderwerp</strong>
+        {%- if rel.panels %}<img class="panel-img" src="{{ rel.panels[0].image | relative_url }}" alt="{{ rel.panels[0].alt }}" loading="lazy">{% endif %}
+        <a class="btn btn--ink" href="{{ rel.url | relative_url }}">Lees de strip</a>
+      </aside>
+      {%- endif -%}
+      {%- endif %}
+    </div>
+  </article>
+
+  {%- assign meer = site.posts | where: "editie", page.editie | where_exp: "p", "p.url != page.url" -%}
+  {%- if meer.size > 0 %}
+  <section class="section" aria-labelledby="meer">
+    <div class="section__head"><h2 id="meer">Meer in deze editie</h2></div>
+    <div class="grid grid--articles">
+      {%- for p in meer %}{% include artikelkaart.html post=p %}{% endfor %}
+    </div>
+  </section>
+  {%- endif %}
+</main>

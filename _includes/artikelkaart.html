@@ -1,0 +1,14 @@
+{%- assign p = include.post -%}
+{%- assign tint = site.data.rubrieken[p.rubriek] | default: "#DDD6FE" -%}
+<a class="card article-card" href="{{ p.url | relative_url }}">
+  {%- if p.image -%}
+  <div class="article-card__img"><img src="{{ p.image | relative_url }}" alt="" loading="lazy"></div>
+  {%- else -%}
+  <div class="article-card__img ht" style="background-color: {{ tint }}"></div>
+  {%- endif -%}
+  <div class="article-card__body">
+    {%- if p.rubriek %}<span class="tag tag--sm">{{ p.rubriek }}</span>{% endif %}
+    <h3>{{ p.title }}</h3>
+    {%- if p.intro %}<p>{{ p.intro }}</p>{% endif %}
+  </div>
+</a>

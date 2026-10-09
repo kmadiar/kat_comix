@@ -1,0 +1,64 @@
+---
+layout: default
+nav: strips
+body_class: reader
+---
+{%- assign reeks = site.data.series | where: "id", page.series | first -%}
+{%- assign afleveringen = site.comics | where: "series", page.series | sort: "episode" -%}
+{%- assign vorige = nil -%}{%- assign volgende = nil -%}
+{%- for c in afleveringen -%}
+  {%- if c.url == page.url -%}
+    {%- assign i = forloop.index0 -%}
+    {%- if i > 0 %}{% assign vi = i | minus: 1 %}{% assign vorige = afleveringen[vi] %}{% endif -%}
+    {%- assign ni = i | plus: 1 -%}{%- if ni < afleveringen.size %}{% assign volgende = afleveringen[ni] %}{% endif -%}
+  {%- endif -%}
+{%- endfor -%}
+<main class="reader-main">
+  <div class="reader-bar">
+    <a class="back-btn" href="{{ '/strips/' | relative_url }}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Terug
+    </a>
+    <div class="seg" role="group" aria-label="Leesmodus">
+      <button type="button" data-mode="page" aria-pressed="true">Pagina</button>
+      <button type="button" data-mode="strip" aria-pressed="false">Plaatje voor plaatje</button>
+    </div>
+  </div>
+
+  <header class="reader-head">
+    <div class="row">
+      <span class="tag tag--sun">Aflevering {{ page.episode }}</span>
+      {%- if reeks %}<a href="{{ '/strips/' | relative_url }}#{{ reeks.id }}">{{ reeks.name }}</a>{% endif %}
+    </div>
+    <h1>{{ page.title }}</h1>
+    <span class="meta">Verhaal en tekeningen: {{ page.author | default: reeks.author }}{% assign k = page.klas | default: reeks.klas %}{% if k %}, {{ k }}{% endif %} · {% include datum.html date=page.date %}</span>
+  </header>
+
+  <div class="comic comic--page" data-comic>
+    {%- for p in page.panels %}
+    <figure class="comic__panel{% if p.wide %} comic__panel--wide{% endif %}">
+      <img src="{{ p.image | relative_url }}" alt="{{ p.alt | escape }}" loading="{% if forloop.index > 2 %}lazy{% else %}eager{% endif %}">
+      <span class="comic__count" aria-hidden="true">{{ forloop.index }} / {{ forloop.length }}</span>
+    </figure>
+    {%- endfor %}
+  </div>
+
+  <nav class="reader-nav" aria-label="Afleveringen">
+    {%- if vorige %}
+    <a class="btn btn--light" href="{{ vorige.url | relative_url }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Vorige</a>
+    {%- else %}<span></span>{% endif %}
+    {%- if volgende %}
+    <a class="btn btn--sun" href="{{ volgende.url | relative_url }}">Volgende aflevering<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    {%- else %}<span class="meta">Volgende aflevering volgt binnenkort</span>{% endif %}
+  </nav>
+
+  {%- assign notitie = content | strip -%}
+  {%- if notitie != "" %}
+  <section class="maker" aria-label="Over de maker">
+    <span class="maker__avatar ht" aria-hidden="true"></span>
+    <div class="maker__text">
+      <strong>{{ page.author | default: reeks.author }}</strong>
+      {{ content }}
+    </div>
+  </section>
+  {%- endif %}
+</main>

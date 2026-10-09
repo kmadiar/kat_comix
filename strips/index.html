@@ -1,0 +1,84 @@
+---
+layout: default
+title: Strips
+nav: strips
+---
+{%- assign genres = site.data.series | map: "genre" | uniq | sort -%}
+{%- assign nieuw = site.comics | sort: "date" | reverse -%}
+<section class="banner htl">
+  <div class="wrap banner__in">
+    <div>
+      <h1>Strips</h1>
+      <p>Alle reeksen van onze krant op één plek. Elke week nieuwe afleveringen, samen met de editie.</p>
+    </div>
+    <span class="sfx" aria-hidden="true">ZOEF!</span>
+  </div>
+</section>
+
+<main class="wrap page">
+  <section class="section" aria-labelledby="reeksen">
+    <div class="section__head section__head--plain">
+      <h2 id="reeksen">Reeksen</h2>
+      <div class="pills" role="group" aria-label="Filter op genre" data-filter>
+        <button type="button" class="pill" data-genre="" aria-pressed="true">Alle</button>
+        {%- for g in genres %}
+        <button type="button" class="pill" data-genre="{{ g }}" aria-pressed="false">{{ g }}</button>
+        {%- endfor %}
+      </div>
+    </div>
+    <div class="grid grid--articles" data-filter-items>
+      {%- for s in site.data.series %}
+      {%- assign eps = site.comics | where: "series", s.id | sort: "episode" -%}
+      {%- assign laatste = eps | last -%}
+      <article class="card series-big" id="{{ s.id }}" data-genre="{{ s.genre }}">
+        <a class="series-big__cover ht" href="{% if eps.first %}{{ eps.first.url | relative_url }}{% else %}#{% endif %}" style="background-color: {{ s.tint | default: '#C4B5FD' }}" aria-label="Begin met lezen: {{ s.name }}">
+          {%- if s.cover %}<img src="{{ s.cover | relative_url }}" alt="">{% endif %}
+        </a>
+        <div class="series-big__body">
+          <div class="row">
+            <span class="tag tag--sm">{{ s.genre }}</span>
+            {%- if laatste and nieuw.first.url == laatste.url %}<span class="tag tag--sm tag--pink">Nieuwe aflevering</span>{% endif %}
+          </div>
+          <h3>{{ s.name }}</h3>
+          {%- if s.description %}<p>{{ s.description }}</p>{% endif %}
+          <span class="byline">{{ s.author }}{% if s.klas %}, {{ s.klas }}{% endif %} · {{ eps.size }} {% if eps.size == 1 %}aflevering{% else %}afleveringen{% endif %}</span>
+          {%- if eps.size > 0 %}
+          <ol class="episode-list">
+            {%- for e in eps %}
+            <li><a href="{{ e.url | relative_url }}"><span>#{{ e.episode }}</span> {{ e.title }}</a></li>
+            {%- endfor %}
+          </ol>
+          {%- endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </section>
+
+  {%- if nieuw.size > 0 %}
+  <section class="section" aria-labelledby="nieuw">
+    <div class="section__head"><h2 id="nieuw">Nieuwe afleveringen</h2></div>
+    <div class="grid grid--episodes">
+      {%- for e in nieuw limit: 8 %}
+      {%- assign r = site.data.series | where: "id", e.series | first -%}
+      <a class="card episode-card" href="{{ e.url | relative_url }}">
+        <div class="episode-card__img">
+          {%- if e.panels %}<img src="{{ e.panels[0].image | relative_url }}" alt="" loading="lazy">{% endif %}
+          <span class="episode-card__num">#{{ e.episode }}</span>
+        </div>
+        <strong>{{ e.title }}</strong>
+        <span>{{ r.name }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </section>
+  {%- endif %}
+
+  <aside class="callout callout--big" aria-label="Strip insturen">
+    <div>
+      <strong>Wil je een eigen reeks?</strong>
+      <span>Stuur je eerste aflevering naar de redactie — wij helpen met de tekst en publiceren hem.</span>
+    </div>
+    <a class="btn btn--ink" href="{% include insturen.html %}">Strip insturen</a>
+  </aside>
+</main>

@@ -1,0 +1,10 @@
+# Stripreeksen. Elke aflevering in _comics/ verwijst met "series:" naar een id hieronder.
+# cover is optioneel (pad naar een afbeelding in assets/).
+- id: voorbeeldreeks
+  name: "Voorbeeldreeks"
+  genre: "Schoolleven"
+  description: "Een voorbeeld van hoe een reeks eruitziet. Vervang deze door je eigen reeks."
+  author: "[Naam]"
+  klas: "[klas]"
+  tint: "#C4B5FD"
+  cover: /assets/comics/voorbeeldreeks/cover.svg

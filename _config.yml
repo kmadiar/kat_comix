@@ -1,0 +1,45 @@
+# De Paarse Post — schoolkrant
+# Pas deze waarden aan voor jouw school.
+title: "De Paarse Post"
+school: "[naam school]"
+description: "Schoolkrant met strips en artikelen door leerlingen. Elke week een nieuwe editie."
+lang: nl
+timezone: Europe/Amsterdam
+
+# GitHub Pages: projectsite op https://<gebruikersnaam>.github.io/kat_comix/
+# Heet je repository anders? Zet hier "/<repo-naam>".
+# Gebruik je een eigen domein of <gebruikersnaam>.github.io als repo? Zet dan "".
+baseurl: "/kat_comix"
+url: ""
+
+# Waar leerlingen hun strip of artikel kunnen insturen (bv. "mailto:redactie@school.nl").
+# Leeg = de knop "Insturen" gaat naar de pagina Over ons.
+insturen_link: ""
+
+permalink: /artikelen/:year/:month/:day/:title/
+
+collections:
+  comics:
+    output: true
+    permalink: /strips/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: comics
+    values:
+      layout: comic
+
+markdown: kramdown
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle

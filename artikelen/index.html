@@ -1,0 +1,26 @@
+---
+layout: default
+title: Artikelen
+nav: artikelen
+---
+<main class="wrap page">
+  <header class="page-head">
+    <h1>Artikelen</h1>
+    <p>Alle edities van {{ site.title }}, de nieuwste bovenaan.</p>
+  </header>
+  {%- assign per_editie = site.posts | group_by: "editie" -%}
+  {%- for groep in per_editie %}
+  {%- assign eerste = groep.items | first -%}
+  <section class="section" aria-labelledby="editie-{{ groep.name }}">
+    <div class="section__head">
+      <h2 id="editie-{{ groep.name }}">Editie nr. {{ groep.name }}</h2>
+      <span class="meta">{% include datum.html date=eerste.date %}</span>
+    </div>
+    <div class="grid grid--articles">
+      {%- for p in groep.items %}{% include artikelkaart.html post=p %}{% endfor %}
+    </div>
+  </section>
+  {%- else %}
+  <p>Er zijn nog geen artikelen. De eerste editie komt eraan!</p>
+  {%- endfor %}
+</main>
