@@ -51,14 +51,4 @@ body_class: reader
     {%- else %}<span class="meta">Volgende aflevering volgt binnenkort</span>{% endif %}
   </nav>
 
-  {%- assign notitie = content | strip -%}
-  {%- if notitie != "" %}
-  <section class="maker" aria-label="Over de maker">
-    <span class="maker__avatar ht" aria-hidden="true"></span>
-    <div class="maker__text">
-      <strong>{{ page.author | default: reeks.author }}</strong>
-      {{ content }}
-    </div>
-  </section>
-  {%- endif %}
 </main>
