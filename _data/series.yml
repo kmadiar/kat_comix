@@ -1,10 +1,10 @@
 # Stripreeksen. Elke aflevering in _comics/ verwijst met "series:" naar een id hieronder.
 # cover is optioneel (pad naar een afbeelding in assets/).
-- id: voorbeeldreeks
-  name: "Voorbeeldreeks"
-  genre: "Schoolleven"
-  description: "Een voorbeeld van hoe een reeks eruitziet. Vervang deze door je eigen reeks."
+- id: kat-en-co
+  name: "Kat & Co Detective"
+  genre: "Detective"
+  description: "Detective Katerina lost de raadsels in de buurt op. Ze let op elk detail — en jij kunt meespeuren!"
   author: "[Naam]"
   klas: "[klas]"
-  tint: "#C4B5FD"
-  cover: /assets/comics/voorbeeldreeks/cover.svg
+  tint: "#FFB3D1"
+  cover: /assets/comics/kat-en-co/cover.svg

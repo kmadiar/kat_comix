@@ -3,7 +3,6 @@ layout: default
 title: Strips
 nav: strips
 ---
-{%- assign genres = site.data.series | map: "genre" | uniq | sort -%}
 {%- assign nieuw = site.comics | sort: "date" | reverse -%}
 <section class="banner htl">
   <div class="wrap banner__in">
@@ -19,14 +18,8 @@ nav: strips
   <section class="section" aria-labelledby="reeksen">
     <div class="section__head section__head--plain">
       <h2 id="reeksen">Reeksen</h2>
-      <div class="pills" role="group" aria-label="Filter op genre" data-filter>
-        <button type="button" class="pill" data-genre="" aria-pressed="true">Alle</button>
-        {%- for g in genres %}
-        <button type="button" class="pill" data-genre="{{ g }}" aria-pressed="false">{{ g }}</button>
-        {%- endfor %}
-      </div>
     </div>
-    <div class="grid grid--articles" data-filter-items>
+    <div class="grid grid--articles">
       {%- for s in site.data.series %}
       {%- assign eps = site.comics | where: "series", s.id | sort: "episode" -%}
       {%- assign laatste = eps | last -%}
@@ -41,7 +34,7 @@ nav: strips
           </div>
           <h3>{{ s.name }}</h3>
           {%- if s.description %}<p>{{ s.description }}</p>{% endif %}
-          <span class="byline">{{ s.author }}{% if s.klas %}, {{ s.klas }}{% endif %} · {{ eps.size }} {% if eps.size == 1 %}aflevering{% else %}afleveringen{% endif %}</span>
+          <span class="byline">{{ eps.size }} {% if eps.size == 1 %}aflevering{% else %}afleveringen{% endif %}</span>
           {%- if eps.size > 0 %}
           <ol class="episode-list">
             {%- for e in eps %}
@@ -63,7 +56,8 @@ nav: strips
       {%- assign r = site.data.series | where: "id", e.series | first -%}
       <a class="card episode-card" href="{{ e.url | relative_url }}">
         <div class="episode-card__img">
-          {%- if e.panels %}<img src="{{ e.panels[0].image | relative_url }}" alt="" loading="lazy">{% endif %}
+          {%- assign ekaft = e.cover | default: r.cover | default: e.panels[0].image -%}
+          {%- if ekaft %}<img src="{{ ekaft | relative_url }}" alt="" loading="lazy">{% endif %}
           <span class="episode-card__num">#{{ e.episode }}</span>
         </div>
         <strong>{{ e.title }}</strong>
@@ -74,11 +68,4 @@ nav: strips
   </section>
   {%- endif %}
 
-  <aside class="callout callout--big" aria-label="Strip insturen">
-    <div>
-      <strong>Wil je een eigen reeks?</strong>
-      <span>Stuur je eerste aflevering naar de redactie — wij helpen met de tekst en publiceren hem.</span>
-    </div>
-    <a class="btn btn--ink" href="{% include insturen.html %}">Strip insturen</a>
-  </aside>
 </main>

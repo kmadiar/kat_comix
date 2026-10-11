@@ -1,4 +1,4 @@
-/* De Paarse Post — ontwerpsysteem */
+/* Strips&Meer — ontwerpsysteem */
 :root {
   --inkt: #1E1033;
   --paars-900: #2E1065;
@@ -115,7 +115,7 @@ a.card:hover, .card:has(a:hover) { transform: translate(-2px, -2px); box-shadow:
 .article-card p { font-size: 15px; color: var(--tekst-zacht); }
 
 .series-card { overflow: hidden; display: flex; flex-direction: column; }
-.series-card__cover { position: relative; aspect-ratio: 4 / 3; border-bottom: var(--lijn); }
+.series-card__cover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: var(--lijn); }
 .series-card__cover img { width: 100%; height: 100%; object-fit: cover; }
 .series-card__body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--tekst-zacht); }
 .series-card h3 { font-size: 17px; color: var(--inkt); }
@@ -135,7 +135,7 @@ a.card:hover, .card:has(a:hover) { transform: translate(-2px, -2px); box-shadow:
 
 .episode-card { padding: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--tekst-zacht); }
 .episode-card strong { font-family: var(--font-kop); font-size: 15px; line-height: 1.25; color: var(--inkt); }
-.episode-card__img { position: relative; aspect-ratio: 3 / 4; border: var(--lijn); border-radius: 8px; overflow: hidden; background: var(--lavendel-200); }
+.episode-card__img { position: relative; aspect-ratio: 16 / 9; border: var(--lijn); border-radius: 8px; overflow: hidden; background: var(--lavendel-200); }
 .episode-card__img img { width: 100%; height: 100%; object-fit: cover; }
 .episode-card__num { position: absolute; top: 10px; left: 10px; background: var(--zon); border: 2px solid var(--inkt); padding: 2px 8px; font-family: var(--font-kop); font-weight: 700; font-size: 13px; color: var(--inkt); }
 
@@ -154,9 +154,8 @@ a.card:hover, .card:has(a:hover) { transform: translate(-2px, -2px); box-shadow:
 .hero__comic { padding: 24px; display: flex; flex-direction: column; gap: 18px; border-radius: var(--r-groot); box-shadow: var(--schaduw-m); min-width: 0; }
 .hero__comic h1 { font-weight: 700; font-size: clamp(24px, 3vw, 34px); }
 .hero__comic .lead { font-size: 17px; max-width: 60ch; }
-.strip-preview { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.strip-preview img { display: block; width: 100%; height: auto; border: var(--lijn); border-radius: 8px; background: var(--lavendel-200); }
-.strip-preview img:first-child { grid-column: 1 / -1; }
+.episode-cover { display: block; }
+.episode-cover img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: var(--lijn); border-radius: 10px; background: var(--lavendel-200); }
 .hero__side { display: flex; flex-direction: column; gap: 28px; min-width: 0; }
 .feature { background-color: var(--paars-700); color: #fff; padding: 28px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1; border-radius: var(--r-groot); box-shadow: var(--schaduw-m); }
 .feature h2 { font-size: clamp(24px, 2.6vw, 32px); }
@@ -257,6 +256,8 @@ body.reader .back-btn:hover { background: #3B1A85; color: #fff; }
 .maker__avatar { width: 72px; height: 72px; border-radius: 999px; background-color: var(--lila-300); border: 3px solid #000; flex-shrink: 0; }
 .maker__text { flex: 1 1 240px; display: flex; flex-direction: column; gap: 4px; color: var(--lavendel-200); }
 .maker__text strong { font-family: var(--font-kop); font-size: 17px; color: #fff; }
+.maker__text a { color: var(--zon); }
+.maker__text img { display: block; width: 100%; max-width: 360px; height: auto; margin-top: 10px; border: 3px solid #000; border-radius: 8px; }
 
 @media (max-width: 560px) {
   .wrap { padding-inline: 16px; }

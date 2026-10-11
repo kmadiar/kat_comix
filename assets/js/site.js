@@ -1,4 +1,4 @@
-// De Paarse Post — kleine interacties (werkt ook zonder JavaScript)
+// Strips&Meer — kleine interacties (werkt ook zonder JavaScript)
 (function () {
   // Genrefilter op de stripspagina
   var filter = document.querySelector('[data-filter]');

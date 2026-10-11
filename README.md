@@ -1,4 +1,4 @@
-# De Paarse Post
+# Strips&Meer
 
 School newspaper website: weekly articles and comics. Built with Jekyll, which GitHub Pages builds automatically — no build tools needed on your computer.
 
@@ -31,7 +31,7 @@ klas: "2B"
 featured: true            # optional: the main article of the edition
 image: /assets/img/2026-10-16-photo.jpg   # optional
 image_caption: "Caption · Foto: Name"     # optional
-strip: voorbeeldreeks-01  # optional: show a related comic next to the article
+strip: kat-en-co-01  # optional: show a related comic next to the article
 ---
 Article text in Markdown.
 
@@ -52,15 +52,16 @@ Posts dated in the future are not published until that date.
 ```markdown
 ---
 title: "Episode title"
-series: voorbeeldreeks
+series: kat-en-co
 episode: 2
+cover: /assets/comics/kat-en-co/02-cover.jpg   # optional: episode cover on the home page (else the series cover, else the first panel)
 date: 2026-10-16
-teaser: "One line for the home page."
+teaser: "One line, used as the page description for search engines and link previews."
 panels:
-  - image: /assets/comics/voorbeeldreeks/02-1.jpg
+  - image: /assets/comics/kat-en-co/02-1.jpg
     alt: "Short description of what happens in the panel"
     wide: true            # optional: full width in page view
-  - image: /assets/comics/voorbeeldreeks/02-2.jpg
+  - image: /assets/comics/kat-en-co/02-2.jpg
     alt: "…"
 ---
 Optional note from the maker.
@@ -70,7 +71,7 @@ The newest comic (by `date`) automatically becomes **Strip van de week** on the 
 
 ### Add a new series
 
-Add an entry to `_data/series.yml` (id, name, genre, description, author, klas, tint, optional cover). The genre filter on the Strips page updates itself.
+Add an entry to `_data/series.yml` (id, name, genre, description, author, klas, tint, optional cover).
 
 ## Preview locally (optional)
 
@@ -91,7 +92,7 @@ Then open http://localhost:4000/kat_comix/
 | `_data/series.yml` | Comic series |
 | `_data/rubrieken.yml` | Article categories and colors |
 | `_layouts/`, `_includes/` | Page templates |
-| `assets/css/style.css` | Design system (colors, type, components) |
+| `assets/css/site.css` | Design system (colors, type, components) |
 | `assets/js/site.js` | Genre filter and comic reading mode |
 
-The sample post and the "Voorbeeldreeks" comic are placeholders — replace or delete them.
+The sample welcome post is a placeholder — replace or delete it.

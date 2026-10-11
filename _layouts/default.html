@@ -8,10 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Golos+Text:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
 </head>
-<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
+{%- assign body_class = page.body_class | default: layout.body_class -%}
+<body{% if body_class %} class="{{ body_class }}"{% endif %}>
   <a class="skip" href="#inhoud">Naar de inhoud</a>
   {% include header.html %}
   <div id="inhoud">

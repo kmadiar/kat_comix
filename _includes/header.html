@@ -1,3 +1,4 @@
+{%- assign nav = page.nav | default: layout.nav -%}
 {%- assign laatste = site.posts.first -%}
 <div class="topbar">
   <div class="wrap topbar__in">
@@ -9,17 +10,17 @@
   <div class="wrap site-header__in">
     <a class="brand" href="{{ '/' | relative_url }}">
       {%- if page.masthead -%}
-      <span class="brand__name">De Paarse<br>Post</span>
+      <span class="brand__name">Strips&amp;<br>Meer</span>
       <span class="brand__sub">Schoolkrant van {{ site.school }} · strips en artikelen door leerlingen</span>
       {%- else -%}
       <span class="brand__name">{{ site.title }}</span>
       {%- endif -%}
     </a>
     <nav class="nav" aria-label="Hoofdmenu">
-      <a href="{{ '/' | relative_url }}"{% if page.nav == 'home' %} aria-current="page"{% endif %}>Home</a>
-      <a href="{{ '/strips/' | relative_url }}"{% if page.nav == 'strips' %} aria-current="page"{% endif %}>Strips</a>
-      <a href="{{ '/artikelen/' | relative_url }}"{% if page.nav == 'artikelen' %} aria-current="page"{% endif %}>Artikelen</a>
-      <a href="{{ '/over/' | relative_url }}"{% if page.nav == 'over' %} aria-current="page"{% endif %}>Over ons</a>
+      <a href="{{ '/' | relative_url }}"{% if nav == 'home' %} aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/strips/' | relative_url }}"{% if nav == 'strips' %} aria-current="page"{% endif %}>Strips</a>
+      <a href="{{ '/artikelen/' | relative_url }}"{% if nav == 'artikelen' %} aria-current="page"{% endif %}>Artikelen</a>
+      <a href="{{ '/over/' | relative_url }}"{% if nav == 'over' %} aria-current="page"{% endif %}>Over ons</a>
     </nav>
   </div>
 </header>

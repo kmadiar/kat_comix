@@ -1,5 +1,5 @@
 ---
-title: "Welkom bij De Paarse Post"
+title: "Welkom bij Strips&Meer"
 editie: 1
 rubriek: Schoolnieuws
 featured: true
