@@ -1,0 +1,17 @@
+---
+layout: default
+title: Favorieten
+nav: favorieten
+---
+<main class="wrap page">
+  <header class="page-head">
+    <h1>Favorieten</h1>
+    <p>Strips die je hebt geliket. Ze worden bewaard in deze browser op dit apparaat.</p>
+  </header>
+  <div class="grid grid--series" id="favlijst" data-fav-list></div>
+  <div class="fav-empty" id="favleeg" hidden>
+    <strong>Nog geen favorieten</strong>
+    <span>Druk bij een strip op het hartje om hem hier te bewaren.</span>
+    <a class="btn btn--sun" href="{{ '/strips/' | relative_url }}">Naar de strips</a>
+  </div>
+</main>

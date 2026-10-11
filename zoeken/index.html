@@ -1,0 +1,49 @@
+---
+layout: default
+title: Zoeken
+nav: zoeken
+---
+<main class="wrap page">
+  <div class="search">
+    <header class="page-head">
+      <h1>Zoeken</h1>
+    </header>
+    <form class="search__field" role="search" action="{{ '/zoeken/' | relative_url }}" method="get" onsubmit="return false">
+      <label for="zoekveld">Zoek in strips en artikelen</label>
+      <div class="search__box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input id="zoekveld" name="q" type="search" autocomplete="off" placeholder="Zoek strips, reeksen en artikelen.">
+      </div>
+      <span class="search__count" id="zoekaantal" aria-live="polite">Typ om te zoeken</span>
+    </form>
+    <ul class="search__results" id="zoekresultaten"></ul>
+    <div class="search__empty" id="zoekleeg" hidden>
+      <strong>Niets gevonden</strong>
+      <p>Probeer een ander woord, of kijk bij <a href="{{ '/strips/' | relative_url }}">alle strips</a>.</p>
+    </div>
+  </div>
+</main>
+
+<script type="application/json" id="zoekindex">
+[
+{%- assign eerste = true -%}
+{%- for p in site.posts -%}
+  {%- unless eerste %},{% endunless -%}{%- assign eerste = false -%}
+  {%- capture meta %}Editie nr. {{ p.editie }} · {% include datum.html date=p.date %}{% endcapture -%}
+  {%- capture tekst %}{{ p.intro }} {{ p.author }} {{ p.content | strip_html | strip_newlines | truncatewords: 120, '' }}{% endcapture -%}
+  {"type":"Artikel","title":{{ p.title | jsonify }},"meta":{{ meta | strip | jsonify }},"url":{{ p.url | relative_url | jsonify }},"img":{% if p.image %}{{ p.image | relative_url | jsonify }}{% else %}null{% endif %},"text":{{ tekst | jsonify }}}
+{%- endfor -%}
+{%- for c in site.comics -%}
+  {%- unless eerste %},{% endunless -%}{%- assign eerste = false -%}
+  {%- assign r = site.data.series | where: "id", c.series | first -%}
+  {%- assign kaft = c.cover | default: r.cover | default: c.panels[0].image -%}
+  {%- capture tekst %}{{ c.teaser }} {{ r.name }} {{ r.genre }} {% for pn in c.panels %}{{ pn.alt }} {% endfor %}{% endcapture -%}
+  {"type":"Strip","title":{{ c.title | jsonify }},"meta":{{ r.name | append: " · Aflevering " | append: c.episode | jsonify }},"url":{{ c.url | relative_url | jsonify }},"img":{% if kaft %}{{ kaft | relative_url | jsonify }}{% else %}null{% endif %},"text":{{ tekst | jsonify }}}
+{%- endfor -%}
+{%- for s in site.data.series -%}
+  {%- unless eerste %},{% endunless -%}{%- assign eerste = false -%}
+  {%- assign n = site.comics | where: "series", s.id | size -%}
+  {"type":"Reeks","title":{{ s.name | jsonify }},"meta":{{ s.genre | append: " · " | append: n | append: " afl." | jsonify }},"url":{{ '/strips/' | relative_url | append: '#' | append: s.id | jsonify }},"img":{% if s.cover %}{{ s.cover | relative_url | jsonify }}{% else %}null{% endif %},"text":{{ s.description | jsonify }}}
+{%- endfor -%}
+]
+</script>
