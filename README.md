@@ -1,6 +1,6 @@
 # Strips&Meer
 
-School newspaper website: weekly articles and comics. Built with Jekyll, which GitHub Pages builds automatically — no build tools needed on your computer.
+School newspaper website: weekly articles and comics. Built with Jekyll, which GitHub Pages builds automatically — no build tools needed on your computer
 
 ## Put it online (once)
 
