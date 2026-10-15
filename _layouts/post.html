@@ -2,8 +2,6 @@
 layout: default
 nav: artikelen
 ---
-{%- assign woorden = content | number_of_words -%}
-{%- assign minuten = woorden | divided_by: 200 | at_least: 1 -%}
 <main class="wrap page">
   <article class="article">
     <header class="article__head">
@@ -12,11 +10,6 @@ nav: artikelen
         <span class="meta">Editie nr. {{ page.editie }} · {% include datum.html date=page.date %}</span>
       </div>
       <h1>{{ page.title }}</h1>
-      {%- if page.intro %}<p class="article__intro">{{ page.intro }}</p>{% endif %}
-      <div class="author">
-        <span class="author__avatar ht" aria-hidden="true"></span>
-        <span class="author__text"><strong>{{ page.author }}{% if page.klas %}, {{ page.klas }}{% endif %}</strong><span>{{ minuten }} min lezen</span></span>
-      </div>
     </header>
 
     {%- if page.image %}
@@ -35,7 +28,13 @@ nav: artikelen
       {%- if rel %}
       <aside class="related-comic" aria-label="Strip bij dit onderwerp">
         <strong>Strip bij dit onderwerp</strong>
-        {%- if rel.panels %}<img class="panel-img" src="{{ rel.panels[0].image | relative_url }}" alt="{{ rel.panels[0].alt }}" loading="lazy">{% endif %}
+        {%- assign rreeks = site.data.series | where: "id", rel.series | first -%}
+        {%- assign rkaft = rel.cover | default: rreeks.cover | default: rel.panels[0].image -%}
+        {%- if rkaft %}<a class="related-comic__cover" href="{{ rel.url | relative_url }}" aria-label="Lees {{ rel.title | escape }}"><img src="{{ rkaft | relative_url }}" alt="" loading="lazy"></a>{% endif %}
+        <div class="related-comic__info">
+          <span class="related-comic__title">{{ rel.title }}</span>
+          <span>{{ rreeks.name }} · Aflevering {{ rel.episode }}</span>
+        </div>
         <a class="btn btn--ink" href="{{ rel.url | relative_url }}">Lees de strip</a>
       </aside>
       {%- endif -%}
@@ -43,10 +42,15 @@ nav: artikelen
     </div>
   </article>
 
-  {%- assign meer = site.posts | where: "editie", page.editie | where_exp: "p", "p.url != page.url" -%}
+  {%- comment -%} Artikelen met dezelfde rubriek; zonder rubriek: artikelen uit dezelfde editie {%- endcomment -%}
+  {%- if page.rubriek -%}
+    {%- assign meer = site.posts | where: "rubriek", page.rubriek | where_exp: "p", "p.url != page.url" -%}
+  {%- else -%}
+    {%- assign meer = site.posts | where: "editie", page.editie | where_exp: "p", "p.url != page.url" -%}
+  {%- endif -%}
   {%- if meer.size > 0 %}
   <section class="section" aria-labelledby="meer">
-    <div class="section__head"><h2 id="meer">Meer in deze editie</h2></div>
+    <div class="section__head"><h2 id="meer">Artikelen bij dit onderwerp</h2></div>
     <div class="grid grid--articles">
       {%- for p in meer %}{% include artikelkaart.html post=p %}{% endfor %}
     </div>

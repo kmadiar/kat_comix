@@ -9,10 +9,9 @@ nav: zoeken
       <h1>Zoeken</h1>
     </header>
     <form class="search__field" role="search" action="{{ '/zoeken/' | relative_url }}" method="get" onsubmit="return false">
-      <label for="zoekveld">Zoek in strips en artikelen</label>
       <div class="search__box">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-        <input id="zoekveld" name="q" type="search" autocomplete="off" placeholder="Zoek strips, reeksen en artikelen.">
+        <input id="zoekveld" aria-label="Zoek in strips, reeksen en artikelen" name="q" type="search" autocomplete="off" placeholder="Zoek in strips, reeksen en artikelen">
       </div>
       <span class="search__count" id="zoekaantal" aria-live="polite">Typ om te zoeken</span>
     </form>

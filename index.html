@@ -17,7 +17,7 @@ masthead: true
     {%- assign wreeks = site.data.series | where: "id", week.series | first -%}
     <article class="card hero__comic">
       <div class="row">
-        <span class="tag tag--sun">Strip van de week</span>
+        <span class="tag tag--sun">Strip van de dag</span>
         <span class="meta meta--violet">{{ wreeks.name }} · Aflevering {{ week.episode }}</span>
       </div>
       {%- assign kaft = week.cover | default: wreeks.cover | default: week.panels[0].image -%}

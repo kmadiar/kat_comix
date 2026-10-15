@@ -220,6 +220,10 @@ a.card:hover, .card:has(a:hover) { transform: translate(-2px, -2px); box-shadow:
 .article__layout .prose { flex: 999 1 560px; }
 .related-comic { flex: 1 1 280px; display: flex; flex-direction: column; gap: 14px; background: var(--zon); border: var(--lijn); border-radius: var(--r-groot); padding: 20px; }
 .related-comic strong { font-family: var(--font-kop); }
+.related-comic__cover { display: block; aspect-ratio: 16 / 9; border: var(--lijn); border-radius: 8px; overflow: hidden; background: var(--lavendel-200); }
+.related-comic__cover img { width: 100%; height: 100%; object-fit: cover; }
+.related-comic__info { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; }
+.related-comic__title { font-family: var(--font-kop); font-weight: 700; font-size: 17px; line-height: 1.25; }
 .panel-img { border: var(--lijn); border-radius: 8px; background: var(--lavendel-200); }
 
 .prose { min-width: 0; max-width: 720px; font-size: 19px; line-height: 1.7; }
@@ -246,6 +250,7 @@ body.reader .nav a[aria-current="page"] { background: var(--zon); color: var(--i
 body.reader a { color: var(--lila-300); }
 body.reader a:hover { color: #fff; }
 body.reader .btn--sun, body.reader .btn--light { color: var(--inkt); box-shadow: 4px 4px 0 #000; }
+body.reader .btn--sun:hover, body.reader .btn--light:hover { color: var(--inkt); box-shadow: 6px 6px 0 #000; }
 body.reader .site-footer { border-top: 2px solid #6D4BB5; }
 
 .reader-main { max-width: 960px; margin: 0 auto; padding: 24px 24px 64px; display: flex; flex-direction: column; gap: 28px; }
@@ -260,6 +265,9 @@ body.reader .back-btn:hover { background: #6D3FC4; color: #fff; }
 .reader-head h1 { font-weight: 900; font-size: clamp(30px, 4.5vw, 52px); line-height: 1.05; color: #fff; }
 .reader-head .meta { font-size: 15px; color: var(--lila-300); }
 .reader-head .tag { border-color: var(--inkt); }
+.antwoord { align-self: flex-start; max-width: 100%; background: var(--paars-700); border-radius: var(--r-knop); color: var(--papier); }
+.antwoord summary { min-height: 44px; display: flex; align-items: center; padding: 0 16px; font-weight: 700; cursor: pointer; }
+.antwoord p { padding: 0 16px 14px; color: var(--zon); font-weight: 700; }
 
 .comic { margin: 0; }
 .comic__panel { position: relative; margin: 0; }

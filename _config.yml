@@ -2,7 +2,7 @@
 # Pas deze waarden aan voor jouw school.
 title: "Strips&Meer"
 school: "[naam school]"
-description: "Schoolkrant met strips en artikelen door leerlingen. Elke week een nieuwe editie."
+description: "Mijn website. Strips, artikelen en meer! Elke 3 dagen een nieuwe strip."
 lang: nl
 timezone: Europe/Amsterdam
 
@@ -13,7 +13,7 @@ baseurl: "/kat_comix"
 url: ""
 
 # Waar leerlingen hun strip of artikel kunnen insturen (bv. "mailto:redactie@school.nl").
-# Leeg = de knop "Insturen" gaat naar de pagina Over ons.
+# Leeg = de knop "Insturen" gaat naar de pagina Over mij.
 insturen_link: ""
 
 permalink: /artikelen/:year/:month/:day/:title/

@@ -3,7 +3,6 @@
 <div class="topbar">
   <div class="wrap topbar__in">
     <span>{% if laatste %}Editie nr. {{ laatste.editie }} · {% include datum.html date=laatste.date %}{% else %}Eerste editie komt eraan{% endif %}</span>
-    <span>Elke week een nieuwe editie</span>
   </div>
 </div>
 <header class="site-header{% if page.masthead %} site-header--big{% endif %}">
@@ -11,7 +10,7 @@
     <a class="brand" href="{{ '/' | relative_url }}">
       {%- if page.masthead -%}
       <span class="brand__name">Strips&amp;<br>Meer</span>
-      <span class="brand__sub">Schoolkrant van {{ site.school }} · strips en artikelen door leerlingen</span>
+      <span class="brand__sub">Mijn website. Strips, artikelen en meer! Elke 3 dagen een nieuwe strip.</span>
       {%- else -%}
       <span class="brand__name">{{ site.title }}</span>
       {%- endif -%}
@@ -20,7 +19,7 @@
       <a href="{{ '/' | relative_url }}"{% if nav == 'home' %} aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/strips/' | relative_url }}"{% if nav == 'strips' %} aria-current="page"{% endif %}>Strips</a>
       <a href="{{ '/artikelen/' | relative_url }}"{% if nav == 'artikelen' %} aria-current="page"{% endif %}>Artikelen</a>
-      <a href="{{ '/over/' | relative_url }}"{% if nav == 'over' %} aria-current="page"{% endif %}>Over ons</a>
+      <a href="{{ '/over/' | relative_url }}"{% if nav == 'over' %} aria-current="page"{% endif %}>Over mij</a>
       <a class="nav__fav" href="{{ '/favorieten/' | relative_url }}"{% if nav == 'favorieten' %} aria-current="page"{% endif %}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.6-9.2A5.3 5.3 0 0 1 12 6.1a5.3 5.3 0 0 1 9.6 5.2c-2.1 4.6-9.6 9.2-9.6 9.2z"/></svg>Favorieten<span class="fav-count" data-fav-count hidden></span></a>
       <a class="nav__search" href="{{ '/zoeken/' | relative_url }}"{% if nav == 'zoeken' %} aria-current="page"{% endif %}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Zoeken</a>
     </nav>

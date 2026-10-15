@@ -14,8 +14,4 @@ author: "De redactie"
 
 [Leg uit hoe leerlingen een strip of artikel kunnen insturen.]
 
-> „[Een citaat van iemand van de redactie]”
->
-> — [Naam], [rol]
-
 [Slotalinea.]

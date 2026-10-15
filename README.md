@@ -67,7 +67,7 @@ panels:
 Optional note from the maker.
 ```
 
-The newest comic (by `date`) automatically becomes **Strip van de week** on the home page.
+The newest comic (by `date`) automatically becomes **Strip van de dag** on the home page.
 
 ### Add a new series
 
